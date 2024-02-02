@@ -60,27 +60,34 @@
         button.double {
             grid-column: span 2;
         }
+
+        button.clear {
+            grid-column: span 2;
+            background-color: #ff7f7f;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
     <div id="calculator">
         <div id="display">0</div>
         <div id="buttons">
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendInput('7')">7</button>
+            <button onclick="appendInput('8')">8</button>
+            <button onclick="appendInput('9')">9</button>
             <button class="operator" onclick="setOperator('/')">/</button>
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendInput('4')">4</button>
+            <button onclick="appendInput('5')">5</button>
+            <button onclick="appendInput('6')">6</button>
             <button class="operator" onclick="setOperator('*')">*</button>
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendInput('1')">1</button>
+            <button onclick="appendInput('2')">2</button>
+            <button onclick="appendInput('3')">3</button>
             <button class="operator" onclick="setOperator('-')">-</button>
-            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendInput('0')">0</button>
             <button class="double" onclick="appendDecimal()">.</button>
             <button class="operator double" onclick="calculateResult()">=</button>
+            <button class="operator clear" onclick="clearInput()">C</button>
             <button class="operator" onclick="setOperator('+')">+</button>
         </div>
     </div>
@@ -90,18 +97,18 @@
         let operator = '';
         let resultDisplayed = false;
 
-        function appendNumber(number) {
+        function appendInput(value) {
             if (resultDisplayed) {
-                document.getElementById('display').innerText = '';
+                clearDisplay();
                 resultDisplayed = false;
             }
-            currentInput += number;
+            currentInput += value;
             updateDisplay();
         }
 
         function appendDecimal() {
             if (resultDisplayed) {
-                document.getElementById('display').innerText = '';
+                clearDisplay();
                 resultDisplayed = false;
             }
             if (!currentInput.includes('.')) {
@@ -129,6 +136,15 @@
 
         function updateDisplay() {
             document.getElementById('display').innerText = currentInput;
+        }
+
+        function clearInput() {
+            currentInput = '';
+            clearDisplay();
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').innerText = '0';
         }
     </script>
 </body>
